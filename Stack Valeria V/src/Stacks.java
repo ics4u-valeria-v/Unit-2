@@ -7,6 +7,7 @@ import javax.swing.JTextField;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JRootPane;
 
 import java.awt.event.ActionListener;
@@ -16,6 +17,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JComboBox;
+import java.awt.Color;
 
 public class Stacks {
 
@@ -53,7 +55,7 @@ public class Stacks {
 	private void initialize() {
 		frmStacks = new JFrame();
 		frmStacks.setTitle("Stack Program");
-		frmStacks.setBounds(100, 100, 289, 239);
+		frmStacks.setBounds(100, 100, 307, 288);
 		frmStacks.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmStacks.getContentPane().setLayout(null);
 		
@@ -71,44 +73,53 @@ public class Stacks {
 		//JScrollPane scrollList = new JScrollPane();
 		//Create the list
 		JList list = new JList();
+		list.setBackground(new Color(218, 165, 32));
 		//scrollList.setViewportView(list);
 		list.setValueIsAdjusting(true);
 		
 		DefaultListModel numList = new DefaultListModel();
 		list.setModel(numList);
-		list.setBounds(10, 104, 253, 82);
+		list.setBounds(73, 156, 126, 82);
 		
 		frmStacks.getContentPane().add(list);
 		
 		
-		//declare the stack
-		Stack intStack = new Stack();
+		
 		
 		
 		JButton btnPush = new JButton("Add value");
 		btnPush.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
+				//call the stack from a different file
+				StackIntegers stacks = new StackIntegers();
+				
 				//declare global variables
 				int userAnsw = 0;
 				
-				//get the values from the text box and check of they are integers
-				try
-				{
-					userAnsw = Integer.parseInt(txtInteger.getText());
-					System.out.println(userAnsw);
-						intStack.push(userAnsw);
-						
+				try {
+					if (txtInteger.getText().equals("")){
 						//add the answer to the list 
-						numList.addElement(userAnsw);
+						JOptionPane.showMessageDialog(null,"Warning: Stack is Empty","Stacks Warning",JOptionPane.WARNING_MESSAGE);
+					     }
+					else
+					{
+						//get the values from the text box and check of they are integers
+						userAnsw = Integer.parseInt(txtInteger.getText());
 						
-						
+						//call push function
+						stacks.pushStack(userAnsw);
+							
+						//add the answer to the list 
+						numList.addElement(userAnsw);	
+					}
 					
 				}
-				catch(Exception e)
+				catch (Exception e1)
 				{
-					System.out.println("Enter an integer ");
-				}
+					JOptionPane.showMessageDialog(null,"Invalid Input: Enter Integer","Stacks Error",JOptionPane.ERROR_MESSAGE);
+				};
+				
 				
 				
 				
@@ -121,10 +132,13 @@ public class Stacks {
 		btnPop.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				
+				//get the number of the values in the list
+				int listValue = numList.size();
+				//
+				numList.removeElementAt(listValue-1);
 			}
 		});
-		btnPop.setBounds(141, 70, 106, 23);
+		btnPop.setBounds(144, 70, 119, 23);
 		frmStacks.getContentPane().add(btnPop);
 		
 		
