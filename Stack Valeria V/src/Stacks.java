@@ -23,6 +23,12 @@ public class Stacks {
 
 	private JFrame frmStacks;
 	private JTextField txtInteger;
+	
+	//--GLOBAL VARIABLES--//	
+
+	//call the stack from a different file
+	StackIntegers stacks = new StackIntegers();
+	
 
 	/**
 	 * Launch the application.
@@ -55,7 +61,7 @@ public class Stacks {
 	private void initialize() {
 		frmStacks = new JFrame();
 		frmStacks.setTitle("Stack Program");
-		frmStacks.setBounds(100, 100, 307, 288);
+		frmStacks.setBounds(100, 100, 307, 350);
 		frmStacks.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmStacks.getContentPane().setLayout(null);
 		
@@ -79,25 +85,36 @@ public class Stacks {
 		
 		DefaultListModel numList = new DefaultListModel();
 		list.setModel(numList);
-		list.setBounds(73, 156, 126, 82);
+		list.setBounds(72, 140, 126, 114);
 		
 		frmStacks.getContentPane().add(list);
 		
+		JLabel lblPeek = new JLabel("Peeked value:");
+		lblPeek.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblPeek.setBounds(10, 265, 126, 45);
+		frmStacks.getContentPane().add(lblPeek);
+		
+		JLabel lblPop = new JLabel("Poped value:");
+		lblPop.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblPop.setBounds(155, 265, 126, 45);
+		frmStacks.getContentPane().add(lblPop);
 		
 		
 		
-		
-		JButton btnPush = new JButton("Add value");
+		JButton btnPush = new JButton("Add Value");
 		btnPush.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				//call the stack from a different file
-				StackIntegers stacks = new StackIntegers();
+				//clear the list box
+				numList.clear();
 				
-				//declare global variables
+				//declare local variables
 				int userAnsw = 0;
+				Stack<Integer> getStack =  new Stack<Integer>();
 				
+				//check if the user entered an integer
 				try {
+					//check if the user didn't enter anything
 					if (txtInteger.getText().equals("")){
 						//add the answer to the list 
 						JOptionPane.showMessageDialog(null,"Warning: Stack is Empty","Stacks Warning",JOptionPane.WARNING_MESSAGE);
@@ -108,13 +125,20 @@ public class Stacks {
 						userAnsw = Integer.parseInt(txtInteger.getText());
 						
 						//call push function
-						stacks.pushStack(userAnsw);
+						getStack = stacks.pushStack(userAnsw);
+						
+						//loop through each element in the stack and display to the text box
+						 for (int integerStack : getStack)
+						 {
+							//add the answer to the list 
+								numList.addElement(integerStack);	
+						 }
 							
-						//add the answer to the list 
-						numList.addElement(userAnsw);	
+						
 					}
 					
 				}
+				//if the user entered anything different anything different than an integer
 				catch (Exception e1)
 				{
 					JOptionPane.showMessageDialog(null,"Invalid Input: Enter Integer","Stacks Error",JOptionPane.ERROR_MESSAGE);
@@ -125,21 +149,76 @@ public class Stacks {
 				
 			}
 		});
-		btnPush.setBounds(31, 70, 89, 23);
+		btnPush.setBounds(10, 70, 110, 23);
 		frmStacks.getContentPane().add(btnPush);
 		
 		JButton btnPop = new JButton("Pop Top Value");
 		btnPop.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				//get the number of the values in the list
-				int listValue = numList.size();
-				//
-				numList.removeElementAt(listValue-1);
+				int popedVal = 0;
+				//clear the list box
+				numList.clear();
+				
+				//declare local variables
+				Stack<Integer> getStack =  new Stack<Integer>();
+				
+				//get the top value of the stack that will be popped
+				int popVal = stacks.peekStack();
+				
+				//display the popped value
+				lblPop.setText("Popped Value: "+popVal);
+				
+				//call pop function
+				getStack = stacks.popStack(popedVal);
+				
+				//loop through each element in the stack and display to the text box
+				 for (int integerStack : getStack)
+				 {
+					//add the answer to the list 
+						numList.addElement(integerStack);	
+				 }
+				
+				
 			}
 		});
-		btnPop.setBounds(144, 70, 119, 23);
+		btnPop.setBounds(144, 70, 137, 23);
 		frmStacks.getContentPane().add(btnPop);
+		
+		JButton btnPeek = new JButton("Peek Top Value");
+		btnPeek.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//get the top value of the stack 
+				int topVal = stacks.peekStack();
+				
+				//display the popped value
+				lblPeek.setText("Peeked Value: " + topVal);
+			}
+		});
+		btnPeek.setBounds(144, 106, 137, 23);
+		frmStacks.getContentPane().add(btnPeek);
+		
+		JButton btnClear = new JButton("Clear Stack");
+		btnClear.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				//clear the list box
+				numList.clear();
+				//declare local variables
+				Stack<Integer> getStack =  new Stack<Integer>();
+				//call clear function
+				getStack = stacks.clearStack();
+				
+				//loop through each element in the stack and display to the text box
+				 for (int integerStack : getStack)
+				 {
+					//add the answer to the list 
+						numList.addElement(integerStack);	
+				 }
+			}
+		});
+		btnClear.setBounds(10, 106, 110, 23);
+		frmStacks.getContentPane().add(btnClear);
+		
 		
 		
 	}
