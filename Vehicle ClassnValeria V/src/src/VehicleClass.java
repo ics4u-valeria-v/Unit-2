@@ -44,7 +44,7 @@ public class VehicleClass  {
 	     //display the max speed
 	       System.out.println( "Speed: " + myObj.maxSpeedOneGet());
 	       
-//S-E-C-O-N-D  V-E-H-I-C-L-E
+      //S-E-C-O-N-D  V-E-H-I-C-L-E
 	       
 	       String extra = reader.nextLine();
 	       
