@@ -176,10 +176,28 @@ class vehicle
 class truck extends vehicle
 {
 	//declare local variables
-	String _color;
+	
 	int _wheels;
-	int seats;
-	int speed;
-	final int MAX_SPEED = 60;
+	int _seats;
+	final int _MAX_SPEED = 60;
+	
+	//truck class has one constructor
+	public truck (String _color, int _speed )
+	{
+		//invoke base-class
+		super();
+	}
+	
+	//get extra information
+	public void getExtra(int wheels, int seats)
+	{
+		this._wheels = wheels;
+		this._seats = seats;
+	}
+	
+	public String toString()
+	{
+		return(super.toString() + )
+	}
 	
 }
