@@ -30,19 +30,22 @@ public class VehicleClass  {
 	       System.out.print("Insert the number of doors: ");
 	       int doors = reader.nextInt();
 	      //set the plate number to be equal to the user answer
-	       myObj.doorsSet(doors);	       
+	       myObj.doorsSet(doors);	
+	       
+	       //ACCELERATION
+	       System.out.print("Insert acceleration: ");
+	       int accel =  reader.nextInt();
+	       System.out.print("Insert time: ");
+	       int time = reader.nextInt();
+	       
 	       
 	       System.out.println("\n"+"Vehicle #1");
-	     //display the plate number
-	       System.out.println("Plate number: " + myObj.plateNumGet());
-	     //display the color
-	       System.out.println( "Color: " + myObj.colorGet());
-	     //display the doors
-	       System.out.println( "Number of doors: " + myObj.doorsGet());
-	     //display the speed
-	       System.out.println( "Speed: " + myObj.speedGet());
+	     //display the information
+	       System.out.println( myObj.toString());
 	     //display the max speed
 	       System.out.println( "Speed: " + myObj.maxSpeedOneGet());
+	     //display final velocity
+	       System.out.println( "Final velocity: " + myObj.accelerate(accel, time));
 	       
       //S-E-C-O-N-D  V-E-H-I-C-L-E
 	       
@@ -69,78 +72,114 @@ public class VehicleClass  {
 	      //set the plate number to be equal to the user answer
 	       myObj.doorsSet(doors);	    
 	       
+	       //ACCELERATION
+	       System.out.print("Insert acceleration: ");
+	       accel =  reader.nextInt();
+	       System.out.print("Insert time: ");
+	       time = reader.nextInt();
+	       
 	       System.out.println("\n"+"Vehicle #2");
-	     //display the plate number
-	       System.out.println("Plate number: " + myObj.plateNumGet());
-	    //display the color
-	       System.out.println( "Color: " + myObj.colorGet());
-	     //display the doors
-	       System.out.println( "Number of doors: " + myObj.doorsGet());
-	     //display the speed
-	       System.out.println( "Speed: " + myObj.speedGet());
+	     //display the information
+	       System.out.println( myObj.toString());
 	     //display the max speed
 	       System.out.println( "Speed: " + myObj.maxSpeedTwoGet());
+	     //display final velocity
+	       System.out.println( "Final velocity: " + myObj.accelerate(accel, time));
 	    }
 }
 
+//V-E-H-I-C-L-E
 class vehicle 
 {
 	//create local variables/ properties
-	String plateNum = " ";
-	String color = " ";
-	int doorsNum = 0;
-	int speed = 0;
-	int MAX_SPEED_1 = 60;
-	int MAX_SPEED_2 = 70;
+	String _plateNum = " ";
+	String _color = " ";
+	int _doorsNum = 0;
+	int _speed = 0;
+	int _MAX_SPEED_1 = 60;
+	int _MAX_SPEED_2 = 70;
 	
+	//Get and Set methods (Java doesn't have build in functions)
 	//set and get plateNum
 	public String plateNumGet()
 	{
-		return plateNum;
+		return _plateNum;
 	}
 	
 	public void plateNumSet(String newNum)
 	{
-		plateNum = newNum;
+		_plateNum = newNum;
 	}
 	
 	//set and get color
 	public String colorGet()
 	{
-		return color;
+		return _color;
 	}
 	
 	public void colorSet(String newColor)
 	{
-		color = newColor;
+		_color = newColor;
 	}
 	
 	//set and get doors
 	public int doorsGet()
 	{
-		return doorsNum;
+		return _doorsNum;
 	}
 		
 	public void doorsSet(int newDoors)
 	{
-		doorsNum = newDoors;
+		_doorsNum = newDoors;
 	}
 	
 	// get speed
 	public int speedGet()
 	{
-		return speed;
+		return _speed;
 	}
 	
 	//get max speed one
 	public int maxSpeedOneGet()
 	{
-		return MAX_SPEED_1;
+		return _MAX_SPEED_1;
 	}
 	
 	//get max speed one
 	public int maxSpeedTwoGet()
 	{
-		return MAX_SPEED_2;
-	}				
+		return _MAX_SPEED_2;
+	}	
+	
+	public String toString()
+	{
+		return ("Plate number: " + plateNumGet() + "\n" + "Color: " + colorGet() + "\n" + "Number of doors: " + doorsGet());
+	}
+	
+	//Protected methods
+	protected int accelerate (int _accel, int _time)
+	{
+		int _finalSpeed = _speed + _accel*_time;
+		return _finalSpeed;
+	}
+	
+	protected int breaking (int _accel, int _time)
+	{
+		int _finalSpeed = _speed - _accel*_time;
+		return _finalSpeed;
+	}
+}
+
+////////////////////////////////////////////////////////////////////////////
+//DAY 22 - INHERITANCE
+////////////////////////////////////////////////////////////////////////////
+class truck extends vehicle
+{
+	//declare local variables
+	String _color;
+	int _wheels;
+	int seats;
+	int speed;
+	final int MAX_SPEED = 60;
+	
 }
