@@ -4,33 +4,34 @@ import java.util.Scanner;
 public class VehicleClass  {
 	
 	 public static void main(String[] args) {
-		 //create the object related to vehicle class
-	       vehicle myObj = new vehicle();
+		 
+		 //declare local variables 
+		 String plateNum = "";
+		 String color = "";
+		 int doors = 0;
+		 
+		 //constructors
+	      vehicle myObj = new vehicle( color, plateNum, doors );
+	      vehicle bikeObj = new bike("red", 2, 1);
 	       //declare local variables
 	       Scanner reader = new Scanner(System.in);
 	       
-	       //F-I-R-S-T  V-E-H-I-C-L-E
+	      /* //F-I-R-S-T  V-E-H-I-C-L-E
 	       
 	       //PLATE NUMBER
 	       //get the plate number from the user
 	       System.out.print("Insert the plate number: ");
-	       String plateNum = reader.nextLine();
-	      //set the plate number to be equal to the user answer
-	       myObj.plateNumSet(plateNum);
+	       plateNum = reader.nextLine();
 	       
 	     //COLOR
 	       //get the plate number from the user
 	       System.out.print("Insert the color: ");
-	       String color = reader.nextLine();
-	      //set the plate number to be equal to the user answer
-	       myObj.colorSet(color);
+	       color = reader.nextLine();
 	     
 	     //NUMBER OF DOORS
 	       //get the plate number from the user
 	       System.out.print("Insert the number of doors: ");
-	       int doors = reader.nextInt();
-	      //set the plate number to be equal to the user answer
-	       myObj.doorsSet(doors);	
+	       doors = reader.nextInt();
 	       
 	       //ACCELERATION
 	       System.out.print("Insert acceleration: ");
@@ -55,22 +56,16 @@ public class VehicleClass  {
 	       //get the plate number from the user
 	       System.out.print("\n" + "Insert the plate number: ");
 	       plateNum = reader.nextLine();
-	       //set the plate number to be equal to the user answer
-	       myObj.plateNumSet(plateNum);
 	       
 	     //COLOR
 	       //get the plate number from the user
 	       System.out.print("Insert the color: ");
 	       color = reader.nextLine();
-	      //set the plate number to be equal to the user answer
-	       myObj.colorSet(color);
 	     
 	     //NUMBER OF DOORS
 	       //get the plate number from the user
 	       System.out.print("Insert the number of doors: ");
-	       doors = reader.nextInt();
-	      //set the plate number to be equal to the user answer
-	       myObj.doorsSet(doors);	    
+	       doors = reader.nextInt();    
 	       
 	       //ACCELERATION
 	       System.out.print("Insert acceleration: ");
@@ -84,7 +79,29 @@ public class VehicleClass  {
 	     //display the max speed
 	       System.out.println( "Speed: " + myObj.maxSpeedTwoGet());
 	     //display final velocity
-	       System.out.println( "Final velocity: " + myObj.accelerate(accel, time));
+	       System.out.println( "Final velocity: " + myObj.accelerate(accel, time));*/
+	       
+	       
+	       
+	       //B-I-K-E
+	 	     //COLOR
+	 	      //set the plate number to be equal to the user answer
+	 	    
+	 	       
+	 	       /*//ACCELERATION
+	 	       System.out.print("Insert acceleration: ");
+	 	       accel =  reader.nextInt();
+	 	       System.out.print("Insert time: ");
+	 	       time = reader.nextInt();*/
+	 	       
+	 	       System.out.println("Bike" );
+	 	     //display the information
+	 	       System.out.println( bikeObj.toString());
+	 	     /*//display the max speed
+	 	       System.out.println( "Speed: " + myObj.maxSpeedTwoGet());
+	 	     //display final velocity
+	 	       System.out.println( "Final velocity: " + myObj.accelerate(accel, time));*/
+	       
 	    }
 }
 
@@ -99,6 +116,14 @@ class vehicle
 	int _MAX_SPEED_1 = 60;
 	int _MAX_SPEED_2 = 70;
 	
+	//constructor
+	public vehicle (String newColor,String newNum, int newDoors)
+	{
+		_plateNum = newNum;
+		_color = newColor;
+		_doorsNum = newDoors;
+	}
+	
 	//Get and Set methods (Java doesn't have build in functions)
 	//set and get plateNum
 	public String plateNumGet()
@@ -106,20 +131,11 @@ class vehicle
 		return _plateNum;
 	}
 	
-	public void plateNumSet(String newNum)
-	{
-		_plateNum = newNum;
-	}
 	
 	//set and get color
 	public String colorGet()
 	{
 		return _color;
-	}
-	
-	public void colorSet(String newColor)
-	{
-		_color = newColor;
 	}
 	
 	//set and get doors
@@ -128,10 +144,6 @@ class vehicle
 		return _doorsNum;
 	}
 		
-	public void doorsSet(int newDoors)
-	{
-		_doorsNum = newDoors;
-	}
 	
 	// get speed
 	public int speedGet()
@@ -173,31 +185,43 @@ class vehicle
 ////////////////////////////////////////////////////////////////////////////
 //DAY 22 - INHERITANCE
 ////////////////////////////////////////////////////////////////////////////
-class truck extends vehicle
+class bike extends vehicle
 {
 	//declare local variables
-	
+	String _color;
+	int _speed = 0;
 	int _wheels;
 	int _seats;
 	final int _MAX_SPEED = 60;
 	
-	//truck class has one constructor
-	public truck (String _color, int _speed )
+	//bike class has one constructor
+	public bike (String color, int wheels, int seats)
 	{
 		//invoke base-class
-		super();
-	}
-	
-	//get extra information
-	public void getExtra(int wheels, int seats)
-	{
+		super(color, "", 0);
 		this._wheels = wheels;
 		this._seats = seats;
+		//this._color = color;
 	}
 	
+	//Set & get methods
+	
+	//set and get color
+	public String colorGet()
+	{
+		return(super.colorGet());
+	}
+	
+	//get speed
+	public int speedGet()
+	{
+	  return(super.speedGet());
+	}
+	
+	//return the string
 	public String toString()
 	{
-		return(super.toString() + )
+		return("Color: " + colorGet() + "\n" + "Speed: " + speedGet() + "\n" + "Wheels: " + _wheels + "\n" + "Seats: " + _seats + "\n" + "Max Speed: " + _MAX_SPEED);
 	}
 	
 }
