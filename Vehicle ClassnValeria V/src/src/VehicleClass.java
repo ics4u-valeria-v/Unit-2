@@ -11,12 +11,13 @@ public class VehicleClass  {
 		 int doors = 0;
 		 
 		 //constructors
-	      vehicle myObj = new vehicle( color, plateNum, doors );
+	     vehicle myObj = new vehicle( color, plateNum, doors );
 	      vehicle bikeObj = new bike("red", 2, 1);
+	      vehicle truckObj = new truck("AJKF 472", "blue", 18, 5, 54 );
 	       //declare local variables
-	       Scanner reader = new Scanner(System.in);
+	      Scanner reader = new Scanner(System.in);
 	       
-	      /* //F-I-R-S-T  V-E-H-I-C-L-E
+	     //F-I-R-S-T  V-E-H-I-C-L-E
 	       
 	       //PLATE NUMBER
 	       //get the plate number from the user
@@ -79,28 +80,18 @@ public class VehicleClass  {
 	     //display the max speed
 	       System.out.println( "Speed: " + myObj.maxSpeedTwoGet());
 	     //display final velocity
-	       System.out.println( "Final velocity: " + myObj.accelerate(accel, time));*/
+	       System.out.println( "Final velocity: " + myObj.accelerate(accel, time) + "km/s");
 	       
 	       
 	       
-	       //B-I-K-E
-	 	     //COLOR
-	 	      //set the plate number to be equal to the user answer
-	 	    
-	 	       
-	 	       /*//ACCELERATION
-	 	       System.out.print("Insert acceleration: ");
-	 	       accel =  reader.nextInt();
-	 	       System.out.print("Insert time: ");
-	 	       time = reader.nextInt();*/
-	 	       
+	      //B-I-K-E
+	 	     //Display the information
 	 	       System.out.println("Bike" );
-	 	     //display the information
 	 	       System.out.println( bikeObj.toString());
-	 	     /*//display the max speed
-	 	       System.out.println( "Speed: " + myObj.maxSpeedTwoGet());
-	 	     //display final velocity
-	 	       System.out.println( "Final velocity: " + myObj.accelerate(accel, time));*/
+	 	 //T-R-U-C-K
+		 	 //Display the information
+		 	   System.out.println("\n" + "Truck");
+		 	   System.out.println( truckObj.toString());
 	       
 	    }
 }
@@ -109,12 +100,12 @@ public class VehicleClass  {
 class vehicle 
 {
 	//create local variables/ properties
-	String _plateNum = " ";
-	String _color = " ";
-	int _doorsNum = 0;
-	int _speed = 0;
-	int _MAX_SPEED_1 = 60;
-	int _MAX_SPEED_2 = 70;
+	private String _plateNum = " ";
+	private String _color = " ";
+	private int _doorsNum = 0;
+	private int _speed = 0;
+	private int _MAX_SPEED_1 = 60;
+	private int _MAX_SPEED_2 = 70;
 	
 	//constructor
 	public vehicle (String newColor,String newNum, int newDoors)
@@ -144,7 +135,6 @@ class vehicle
 		return _doorsNum;
 	}
 		
-	
 	// get speed
 	public int speedGet()
 	{
@@ -189,7 +179,6 @@ class bike extends vehicle
 {
 	//declare local variables
 	String _color;
-	int _speed = 0;
 	int _wheels;
 	int _seats;
 	final int _MAX_SPEED = 60;
@@ -222,6 +211,64 @@ class bike extends vehicle
 	public String toString()
 	{
 		return("Color: " + colorGet() + "\n" + "Speed: " + speedGet() + "\n" + "Wheels: " + _wheels + "\n" + "Seats: " + _seats + "\n" + "Max Speed: " + _MAX_SPEED);
+	}
+	
+}
+
+
+class truck extends vehicle
+{
+	//declare local variables
+	String _plateNum;
+	String _color;
+	int _numDoors;
+	int _wheels;
+	int _length;
+	final int _MAX_SPEED = 70;
+	
+	//bike class has one constructor
+	public truck (String plateNum, String color, int wheels, int numDoors, int length)
+	{
+		//invoke base-class
+		super(color, plateNum, numDoors);
+		//this._plateNum = plateNum;
+		this._wheels = wheels;
+		//this._numDoors = numDoors;
+		this._length = length;
+		//this._color = color;
+	}
+	
+	//Set & get methods
+	
+	//set and get color
+	public String colorGet()
+	{
+		return(super.colorGet());
+	}
+	
+	//set and get plateNum
+	public String plateNumGet()
+	{
+		return(super.plateNumGet());
+	}
+	
+	//set and get plateNum
+	public int numDoorsGet()
+	{
+		return(super.doorsGet());
+	}
+	
+	//get speed
+	public int speedGet()
+	{
+	  return(super.speedGet());
+	}
+	
+	//return the string
+	public String toString()
+	{
+		return("License Plate : " + plateNumGet() + "\n" + "Color: " + colorGet() + "\n" + "number of Doors: " + numDoorsGet() + 
+	    "\n" + "Number of Wheels: " + _wheels + "\n" + "Length: " + _length + "\n" + "Speed: " + speedGet()+ "\n" + "Max Speed: " + _MAX_SPEED);
 	}
 	
 }
